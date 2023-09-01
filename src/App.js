@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Routes, Outlet, Link} from "react-router-dom";
+import Home from './page/Home';
+import Run from './page/Run';
+import Yuki from './page/Yuki';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="run" element={<Run />} />
+                    <Route path="yuki" element={<Yuki />} />
+                </Route>
+            </Routes>
+        </div>
+    )
 }
 
-export default App;
+function Layout() {
+    return (
+        <div>
+            <nav>
+                <ul style={{
+                    display: 'flex',
+                    columnGap: '25px',
+                    marginLeft: '650px'
+
+                }}>
+                    <li className="item1">
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li className="item1">
+                        <Link to="/run">Run</Link>
+                    </li>
+                    <li className="item1">
+                        <Link to="/yuki">Yuki</Link>
+                    </li>
+                </ul>
+            </nav>
+            <hr></hr>
+            <Outlet/>
+        </div>
+    )
+}
